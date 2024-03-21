@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <title>Season Smash</title>
+  <link rel="shortcut icon" href="/Season Smash Unity yup/TemplateData/logo.png">
+  <link rel="stylesheet" href="/Season Smash Unity yup/TemplateData/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="/Season Smash Unity yup/TemplateData/kjn.css">
+</head>
+
+<body>
+  <div class="wrapp3r">
+    <div class="box">
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+
+
+
+    <div id="unity-container" class="unity-desktop">
+      <canvas id="unity-canvas" width=960 height=600 tabindex="-1"></canvas>
+      <div id="unity-loading-bar">
+        <div id="unity-logo"></div>
+        <div id="unity-progress-bar-empty">
+          <div id="unity-progress-bar-full"></div>
+        </div>
+      </div>
+      <div id="unity-warning"> </div>
+      <div id="unity-footer">
+        <div id="unity-fullscreen-button"></div>
+      </div>
+    </div>
+    <script>
+
+      var container = document.querySelector("#unity-container");
+      var canvas = document.querySelector("#unity-canvas");
+      var loadingBar = document.querySelector("#unity-loading-bar");
+      var progressBarFull = document.querySelector("#unity-progress-bar-full");
+      var fullscreenButton = document.querySelector("#unity-fullscreen-button");
+      var warningBanner = document.querySelector("#unity-warning");
+
+      // Shows a temporary message banner/ribbon for a few seconds, or
+      // a permanent error message on top of the canvas if type=='error'.
+      // If type=='warning', a yellow highlight color is used.
+      // Modify or remove this function to customize the visually presented
+      // way that non-critical warnings and error messages are presented to the
+      // user.
+      function unityShowBanner(msg, type) {
+        function updateBannerVisibility() {
+          warningBanner.style.display = warningBanner.children.length ? 'block' : 'none';
+        }
+        var div = document.createElement('div');
+        div.innerHTML = msg;
+        warningBanner.appendChild(div);
+        if (type == 'error') div.style = 'background: red; padding: 10px;';
+        else {
+          if (type == 'warning') div.style = 'background: yellow; padding: 10px;';
+          setTimeout(function () {
+            warningBanner.removeChild(div);
+            updateBannerVisibility();
+          }, 5000);
+        }
+        updateBannerVisibility();
+      }
+
+      var buildUrl = "Build";
+      var loaderUrl = buildUrl + "/Season Smash Unity yup.loader.js";
+      var config = {
+        dataUrl: buildUrl + "/Season Smash Unity yup.data",
+        frameworkUrl: buildUrl + "/Season Smash Unity yup.framework.js",
+        codeUrl: buildUrl + "/Season Smash Unity yup.wasm",
+        streamingAssetsUrl: "StreamingAssets",
+        companyName: "Pixel Duel",
+        productName: "Season Smash 2 Player",
+        productVersion: "1.0",
+        showBanner: unityShowBanner,
+      };
+
+      // By default Unity keeps WebGL canvas render target size matched with
+      // the DOM size of the canvas element (scaled by window.devicePixelRatio)
+      // Set this to false if you want to decouple this synchronization from
+      // happening inside the engine, and you would instead like to size up
+      // the canvas DOM size and WebGL render target sizes yourself.
+      // config.matchWebGLToCanvasSize = false;
+
+      if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
+        // Mobile device style: fill the whole browser client area with the game canvas:
+
+        var meta = document.createElement('meta');
+        meta.name = 'viewport';
+        meta.content = 'width=device-width, height=device-height, initial-scale=1.0, user-scalable=no, shrink-to-fit=yes';
+        document.getElementsByTagName('head')[0].appendChild(meta);
+        container.className = "unity-mobile";
+        canvas.className = "unity-mobile";
+
+        // To lower canvas resolution on mobile devices to gain some
+        // performance, uncomment the following line:
+        // config.devicePixelRatio = 1;
+
+
+      } else {
+        // Desktop style: Render the game canvas in a window that can be maximized to fullscreen:
+
+        canvas.style.width = "960px";
+        canvas.style.height = "600px";
+      }
+
+      loadingBar.style.display = "block";
+
+      var script = document.createElement("script");
+      script.src = loaderUrl;
+      script.onload = () => {
+        createUnityInstance(canvas, config, (progress) => {
+          progressBarFull.style.width = 100 * progress + "%";
+        }).then((unityInstance) => {
+          loadingBar.style.display = "none";
+          fullscreenButton.onclick = () => {
+            unityInstance.SetFullscreen(1);
+          };
+        }).catch((message) => {
+          alert(message);
+        });
+      };
+
+      document.body.appendChild(script);
+
+    </script>
+
+
+    <div class="container">
+      <div class="langWrap">
+        <a href="#" language='english' class="active">EN</a>
+        <a href="#" language='French'>FR</a>
+        <a href="#" language='Spanish'>SP</a>
+        <a href="#" language='Japanese'>あ</a>
+      </div>
+
+      <a href="/Season Smash Unity yup/TemplateData/email.html" class="button-86" role="button">📧 Email Us 📧</a>
+
+      <div class="flex"></div>
+
+      <div class="content">
+        <div class="deets">
+          <h2 class="title">Season Smash</h2>
+          <h3 class="title2">Pixel Duels</h3>
+          <p class="description">
+            Play Season Smash with a buddy anytime, immersing yourselves in the magical and serene world of
+            snowball
+            fights and fire. Choose to battle amidst the fiery heart of a volcano, the cheerful snowy mountains,
+            or
+            journey to
+            the future in Neo Tokyo, where futuristic plasma reigns supreme, invented in the year 3036. Assume
+            the
+            roles of
+            Antarcticans Leo and Darwin as they fight for the answer to their research, striving to win the
+            Nobel
+            Prize in 2024. However, only one can emerge victorious. Leo or Darwin: who will it be?
+            <br><br>
+            Note: the project aimed to facilitate friendly competition among friends and family, offering breaks
+            from work to replenish
+            neurotransmitters, boost dopamine levels, and improve concentration for more effective work
+            sessions.
+            Spend just five
+            minutes playing with a buddy to enhance productivity.
+            <br><br>
+            Rating: 9.5 <br><br>
+            Developer: Maxence Finestone <br><br>
+            Released: December 2023 <br><br>
+            Technology: HTML, CSS, JS, Unity (Unity WebGL) <br>
+          </p>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="controls">
+      <h1 class="title3">🕹️</h1>
+      <div class="column">
+        <p class="blu">
+          💙: <br>
+          Left: a <br>
+          Right: d <br>
+          Jump: space <br>
+          shoot: f
+        </p>
+      </div>
+      <div class="column">
+        <p class="grn">
+          💚: <br>
+          Left: ⬅<br>
+          Right: ➡️ <br>
+          Jump: ⬆️<br>
+          shoot: L-Shift
+        </p>
+      </div>
+    </div>
+
+  </div>
+
+  </div>
+
+
+
+
+  <script>
+    const langEl = document.querySelector('.langWrap');
+    const link = document.querySelectorAll('a');
+    const titleEl = document.querySelector('.title');
+    const descrEl = document.querySelector('.description');
+
+    link.forEach(el => {
+      el.addEventListener('click', () => {
+        langEl.querySelector('.active').classList.remove('active');
+        el.classList.add('active');
+
+        const attr = el.getAttribute('language');
+
+        titleEl.textContent = data[attr].title;
+        descrEl.innerHTML = data[attr].description;
+      });
+    });
+
+    /* \n doesnt work :( *cuz not scrit?* */
+
+    var data = {
+      "english": {
+        "title": "Season Smash",
+        "description": "Play Season Smash with a buddy anytime, immersing yourselves in the magical and serene world of snowball fights and fire. Choose to battle amidst the fiery heart of a volcano, the cheerful snowy mountains, or journey to the future in Neo Tokyo, where futuristic plasma reigns supreme, invented in the year 3036.Assume the roles of Antarcticans Leo and Darwin as they fight for the answer to their research, striving to win the Nobel Prize in 2024. However, only one can emerge victorious. Leo or Darwin: who will it be?\n\nNote: the project aimed to facilitate friendly competition among friends and family, offering breaks from work to replenish neurotransmitters, boost dopamine levels, and improve concentration for more effective work sessions. Spend just five minutes playing with a buddy to enhance productivity.\n\nRating: 9.5 \n\nDeveloper: Maxence Finestone\n\nReleased: December 2023\n\nTechnology: HTML, CSS, JS, Unity (Unity WebGL)"
+      },
+      "French": {
+        "title": "Écrasement de saison",
+        "description": "Jouez à Season Smash avec un ami à tout moment et plongez-vous dans le monde magique et serein des combats de boules de neige et du feu. Choisissez de vous battre au milieu du cœur ardent d'un volcan, des joyeuses montagnes enneigées, ou voyagez vers le futur à Neo Tokyo, où le plasma futuriste règne en maître, inventé en 3036. Assumez le rôle des Antarctiques Léon et Darwin alors qu'ils se battent pour la réponse à leurs recherches, s'efforçant de remporter le prix Nobel en 2024. Cependant, un seul peut en sortir victorieux. Léo ou Darwin: qui le fera ? est-ce que c'est ?\n\nRemarque : le projet visait à faciliter la compétition amicale entre amis et en famille, en offrant des pauses au travail pour reconstituer les neurotransmetteurs, augmenter les niveaux de dopamine et améliorer la concentration pour des séances de travail plus efficaces. Passez seulement cinq minutes à jouer avec un ami pour améliorer votre productivité.\n\nNote : 9,5\n\nDéveloppeur : Maxence Finestone\n\nSortie : décembre 2023\n\nTechnologie : HTML, CSS, JS, Unity (Unity WebGL)"
+      },
+      "Spanish": {
+        "title": "Temporada aplastante",
+        "description": "Juega Season Smash con un amigo en cualquier momento, sumergiéndote en el mundo mágico y sereno de las peleas de bolas de nieve y el fuego. Elige luchar en medio del corazón ardiente de un volcán, las alegres montañas nevadas o viaja al futuro en Neo Tokyo, donde el plasma futurista reina supremo, inventado en el año 3036. Asume los roles de los antárticos Leo y Darwin mientras luchan por la respuesta a su investigación, esforzándose por ganar el Premio Nobel en 2024. Sin embargo, solo uno puede salir victorioso. Leo o Darwin: ¿quién lo hará? ¿Será?\n\nNota: el proyecto tenía como objetivo facilitar la competencia amistosa entre amigos y familiares, ofreciendo descansos del trabajo para reponer neurotransmisores, aumentar los niveles de dopamina y mejorar la concentración para sesiones de trabajo más efectivas. Dedique solo cinco minutos a jugar con un amigo para mejorar la productividad.\n\nClasificación: 9,5\n\nDesarrollador: Maxence Finestone\n\nLanzamiento: diciembre de 2023\n\nTecnología: HTML, CSS, JS, Unity (Unity WebGL)"
+      },
+      "Japanese": {
+        "title": "シーズンスマッシュ",
+        "description": "シーズン スマッシュをいつでも友達と一緒にプレイして、雪合戦や火事の魔法的で穏やかな世界に浸ってください。火山の燃えるような中心や陽気な雪山の中で戦うか、未来のプラズマが広がるネオ東京で未来へ旅するかを選択してください。 3036 年に発明され、最高位に君臨します。南極人のレオとダーウィンの役割を引き受けて、研究の答えを求めて戦い、2024 年のノーベル賞受賞を目指します。ただし、勝利できるのはどちらか 1 人だけです。レオとダーウィン、どちらが勝ちますか?それはありますか？\n\n注: このプロジェクトは、友人や家族間の友好的な競争を促進することを目的としており、仕事の休憩を提供して神経伝達物質を補充し、ドーパミンレベルを高め、より効果的な作業セッションのための集中力を向上させます。生産性を高めるために、友達と 5 分間だけ遊んでください。\n\n評価: 9.5\n\n開発者: Maxence Finestone\n\nリリース: 2023 年 12 月\n\nテクノロジー: HTML、CSS、JS、Unity (Unity WebGL)"
+      }
+    }
+  </script>
+
+  <script> alert("USER NOTICE \n\n ⚠️ ONLY APPLICABLE ON A COMPUTER 📵 \n\nThis feature is exclusive to desktop computers. Please switch to a desktop for optimal access, if the user is not currently on a desktop device."); </script>
+
+  <script> alert("USER NOTICE \n\n 🛠️ In Case of Unloaded Stylings, Please Refresh the Page. Thank You! 🙏 \n\nThis notice is intended to inform users that if the styling feature of the website is currently non-functional, please refresh the page to access and experience all of the website's capabilities."); </script>
+
+  <script>
+
+    let docTitle = document.title;
+    window.addEventListener("blur", () => {
+      document.title = "Come back 😔"
+    })
+    window.addEventListener("focus", () => {
+      document.title = docTitle;
+    })
+
+  </script>
+
+  </script>
+
+</body>
+
+</html>
